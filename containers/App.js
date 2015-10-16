@@ -4,9 +4,10 @@ import { ActionCreators } from 'redux-undo';
 import { addTodo, completeTodo, setVisibilityFilter, VisibilityFilters } from '../actions';
 import AddConversation from '../components/AddConversation';
 import ChatList from '../components/ChatList';
-// import Footer from '../components/Footer';
+import Firebase from 'firebase';
 
 class App extends Component {
+
   render() {
     const { dispatch, visibleTodos} = this.props;
     return (
@@ -15,7 +16,9 @@ class App extends Component {
           todos={visibleTodos}
           onTodoClick={index => dispatch(completeTodo(index))} />
         <AddConversation
-          onAddClick={text => dispatch(addTodo(text))} />
+          onAddClick={text => dispatch(addTodo(text))} 
+          // listStore={this.firebaseRefs}
+          />
       </div>
     );
   }
