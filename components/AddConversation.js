@@ -1,6 +1,6 @@
 import React, { findDOMNode, Component, PropTypes } from 'react';
 
-export default class AddTodo extends Component {
+export default class AddConversation extends Component {
   handleClick() {
     const node = findDOMNode(this.refs.input);
     const text = node.value.trim();
@@ -20,6 +20,6 @@ export default class AddTodo extends Component {
   }
 }
 
-AddTodo.propTypes = {
+AddConversation.propTypes = {
   onAddClick: PropTypes.func.isRequired
 };

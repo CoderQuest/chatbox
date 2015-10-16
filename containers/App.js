@@ -2,27 +2,20 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { ActionCreators } from 'redux-undo';
 import { addTodo, completeTodo, setVisibilityFilter, VisibilityFilters } from '../actions';
-import AddTodo from '../components/AddTodo';
-import TodoList from '../components/TodoList';
-import Footer from '../components/Footer';
+import AddConversation from '../components/AddConversation';
+import ChatList from '../components/ChatList';
+// import Footer from '../components/Footer';
 
 class App extends Component {
   render() {
-    const { dispatch, visibleTodos, visibilityFilter } = this.props;
+    const { dispatch, visibleTodos} = this.props;
     return (
       <div>
-        <AddTodo
-          onAddClick={text => dispatch(addTodo(text))} />
-        <TodoList
+        <ChatList
           todos={visibleTodos}
           onTodoClick={index => dispatch(completeTodo(index))} />
-        <Footer
-          filter={visibilityFilter}
-          onFilterChange={nextFilter => dispatch(setVisibilityFilter(nextFilter))}
-          onUndo={() => dispatch(ActionCreators.undo())}
-          onRedo={() => dispatch(ActionCreators.redo())}
-          undoDisabled={this.props.undoDisabled}
-          redoDisabled={this.props.redoDisabled} />
+        <AddConversation
+          onAddClick={text => dispatch(addTodo(text))} />
       </div>
     );
   }
@@ -38,9 +31,7 @@ App.propTypes = {
     'SHOW_ALL',
     'SHOW_COMPLETED',
     'SHOW_ACTIVE'
-  ]).isRequired,
-  undoDisabled: PropTypes.bool.isRequired,
-  redoDisabled: PropTypes.bool.isRequired
+  ]).isRequired
 };
 
 function selectTodos(todos, filter) {
@@ -57,8 +48,6 @@ function selectTodos(todos, filter) {
 
 function select(state) {
   return {
-    undoDisabled: state.todos.past.length === 0,
-    redoDisabled: state.todos.future.length === 0,
     visibleTodos: selectTodos(state.todos.present, state.visibilityFilter),
     visibilityFilter: state.visibilityFilter
   };

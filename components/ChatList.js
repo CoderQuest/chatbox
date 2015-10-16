@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import Todo from './Todo';
+import List from './List';
 
-export default class TodoList extends Component {
+export default class ChatList extends Component {
   render() {
     return (
-      <ul>
+      <ul style={{width:'400px', height:'100px'}}>
         {this.props.todos.map((todo, index) =>
-          <Todo {...todo}
+          <List {...todo}
                 key={index}
                 onClick={() => this.props.onTodoClick(index)} />
         )}
@@ -15,7 +15,7 @@ export default class TodoList extends Component {
   }
 }
 
-TodoList.propTypes = {
+ChatList.propTypes = {
   onTodoClick: PropTypes.func.isRequired,
   todos: PropTypes.arrayOf(PropTypes.shape({
     text: PropTypes.string.isRequired,
