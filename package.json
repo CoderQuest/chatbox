@@ -16,6 +16,7 @@
   "homepage": "http://rackt.github.io/redux",
   "dependencies": {
     "firebase": "^2.3.1",
+    "re-base": "^1.2.1",
     "react": "^0.13.3",
     "react-redux": "^2.1.2",
     "reactfire": "^0.5.1",

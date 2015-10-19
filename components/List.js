@@ -1,5 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import Firebase from 'firebase';
+// import Firebase from 'firebase';
+import Rebase form 're-base';
+
+let base = Rebase.createClass('https://dazzling-fire-504.firebaseio.com/');
 
 export default class List extends Component {
   constructor(props) {
