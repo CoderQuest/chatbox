@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 // import Firebase from 'firebase';
-import Rebase form 're-base';
+import Rebase from 're-base';
 
 let base = Rebase.createClass('https://dazzling-fire-504.firebaseio.com/');
 
@@ -12,15 +12,10 @@ export default class List extends Component {
   }
 
   componentWillMount() {
-    this.fbRef = new Firebase('https://dazzling-fire-504.firebaseio.com/');
-    // console.log(this.state);
-    let _this = this;
-    let chats = this.fbRef.on("child_added", function(snapshot) {
-      let data = snapshot.val();
-      let name = data.user;
-      let message = data.text;
-      let messageDetail = {user: name, text: message}
-      _this.setState((state) => {messages: state.messages.push(messageDetail) })
+    base.syncState('/', {
+      context: this,
+      asArray: true,
+      state: 'messages',
     });
   }
 
@@ -30,10 +25,9 @@ export default class List extends Component {
           <li key={index}>{message.user}: {message.text}</li>
         )
       })
-    return (
-      // <li onClick={this.props.onClick}></li>
+    return (    
       <ul>
-        <li>{messages}</li>
+        {messages}
       </ul>
     );
   }
